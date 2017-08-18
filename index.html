@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/boggle_css.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Boggle</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="boggle_img">
+        <img src="./css/logo.png" alt="img.png">
+      </div>
+      <div class ="sec_wrapper">
+        <div class = "third_wrapper">
+          <div id="boggleGrid">
+            <div id="cube1" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube2" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube3" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube4" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube5" onclick="buildWord(event)" class="btn btnW"></div>
+            <br>
+            <div id="cube6" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube7" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube8" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube9" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube10" onclick="buildWord(event)" class="btn btnW"></div>
+            <br>
+            <div id="cube11" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube12" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube13" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube14" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube15" onclick="buildWord(event)" class="btn btnW"></div>
+            <br>
+            <div id="cube16" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube17" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube18" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube19" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube20" onclick="buildWord(event)" class="btn btnW"></div>
+            <br>
+            <div id="cube21" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube22" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube23" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube24" onclick="buildWord(event)" class="btn btnW"></div>
+            <div id="cube25" onclick="buildWord(event)" class="btn btnW"></div>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class ="word_button">
+        <h3 class = "word">Current Word:</h3><button class = "submit_button" onclick="submitWord(event)">Submit Word</button>
+      </div>
+    </div>
+    <script src="./boggle.js"></script>
+  </body>
+</html>
