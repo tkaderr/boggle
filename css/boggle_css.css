@@ -64,9 +64,17 @@
 
 .word{
   display: inline-block;
+
 }
 
 .submit_button{
   display: inline-block;
-  margin-left: 100px;
+  margin-left: 250px;
+
+}
+
+.build_word{
+  display: inline-block;
+  margin-left: 10px;
+  position: fixed;
 }

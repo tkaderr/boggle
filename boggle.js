@@ -79,7 +79,7 @@ function shuffleBoggleGrid(){
   console.log(boggle_curr);
 }
 
-// build the word 
+// build the word
 function buildWord(event){
 	var cube = event.target;
   curr_index = Number(cube.id.slice(4));
@@ -96,6 +96,7 @@ function buildWord(event){
     console.log("I am in the first check");
     console.log("The current word array:", curr_word);
     console.log("The current string is:",currentString);
+    document.getElementById("boggleword").textContent = currentString;
     return;
   }
   else if(curr_index == prev_index){
@@ -109,6 +110,7 @@ function buildWord(event){
     console.log("I am in the second b check");
     console.log("The current word array:", curr_word);
     console.log("The current string is:",currentString);
+    document.getElementById("boggleword").textContent = currentString;
     return;
   }
 
@@ -116,6 +118,7 @@ function buildWord(event){
     if(curr_word[x] == curr_index){
       console.log("I am in the third check");
       console.log("The current string is:",currentString);
+      document.getElementById("boggleword").textContent = currentString;
       return;
     }
   }
@@ -130,6 +133,7 @@ function buildWord(event){
       console.log("I am in the fourth check");
       console.log("The current word array:", curr_word);
       console.log("The current string is:",currentString);
+      document.getElementById("boggleword").textContent = currentString;
       return;
   	}
   }
