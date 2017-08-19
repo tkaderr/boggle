@@ -99,7 +99,7 @@ function buildWord(event){
     prev_index = Number(cube.id.slice(4));
     curr_word.push(prev_index);
     currentString = currentString.concat(cube.textContent);
-    document.getElementById("boggleword").textContent = currentString;
+    document.getElementById("boggleword").textContent = currentString.toUpperCase();
     return;
   }
   //If the same letter is chosen
@@ -115,13 +115,13 @@ function buildWord(event){
       currentString = currentString.slice(0,-1);
     }
     curr_word.pop();
-    document.getElementById("boggleword").textContent = currentString;
+    document.getElementById("boggleword").textContent = currentString.toUpperCase();
     return;
   }
 //avoid selecting the same letter twice
   for (var x = 0; x<curr_word.length; x++){
     if(curr_word[x] == curr_index){
-      document.getElementById("boggleword").textContent = currentString;
+      document.getElementById("boggleword").textContent = currentString.toUpperCase();
       return;
     }
   }
@@ -133,12 +133,13 @@ function buildWord(event){
       prev_index = Number(cube.id.slice(4));
       curr_word.push(prev_index);
   		currentString = currentString.concat(cube.textContent);
-      document.getElementById("boggleword").textContent = currentString;
+      document.getElementById("boggleword").textContent = currentString.toUpperCase();
       return;
   	}
   }
 }
 
+//Checks to see if the word is already submitted
 function checklist(boggleWords, currentString){
   for (var i = 0; i<boggleWords.length; i++){
     if (boggleWords[i][0] == currentString){
@@ -151,6 +152,7 @@ function checklist(boggleWords, currentString){
 //Once the submit button is clicked
 //There are checks to see if the word is already picked, how big the word is, etc.
 function submitWord(event){
+    currentString = currentString.toLowerCase();
     var curr_len= currentString.length;
     if(curr_len == 0) {
       return;
@@ -214,5 +216,5 @@ function clearBoard(){
 	return;
 }
 
-
+//Instantiate the boggle board
 shuffleBoggleGrid();
