@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./css/boggle_css.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Boggle</title>
   </head>
   <body>
@@ -13,7 +12,7 @@
       </div>
       <div class ="sec_wrapper">
         <div class = "third_wrapper">
-          <div id="boggleGrid">
+          <div id="boggle_grid">
             <div id="cube0" onclick="buildWord(event)" class="btn btnW"></div>
             <div id="cube1" onclick="buildWord(event)" class="btn btnW"></div>
             <div id="cube2" onclick="buildWord(event)" class="btn btnW"></div>
@@ -49,6 +48,10 @@
       </div>
       <div class ="word_button">
         <h3 class = "word">Current Word:</h3><h3 id = "boggleword" class="build_word"></h3><button class = "submit_button" onclick="submitWord(event)">Submit Word</button>
+      </div>
+      <div class ="flex-container">
+          <table id ="word_list">
+          </table>
       </div>
     </div>
     <script src="./boggle.js"></script>

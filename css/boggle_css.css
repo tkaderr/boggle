@@ -1,7 +1,8 @@
 .wrapper {
-  height: 700px;
-  width: auto;
+  height: auto;
+  width: 700px;
   background-color: #F57921;
+  margin: 0 auto;
 }
 
 .sec_wrapper {
@@ -20,12 +21,11 @@
   margin: 0 auto;
 }
 
-
 .boggle_img {
   text-align: center;
 }
 
-#boggleGrid {
+#boggle_grid {
   text-align: center;
 }
 
@@ -36,9 +36,9 @@
 	padding: 5px 16px;
 	display: inline-block;
 	margin: 5px 10px;
-	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-weight: 700;
+  font-family: sans-serif;
 	font-size: 20px;
 	text-align: center;
 	vertical-align: middle;
@@ -76,5 +76,42 @@
 .build_word{
   display: inline-block;
   margin-left: 10px;
-  position: fixed;
+  position: absolute;
+}
+
+
+.flex-container{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+#word_list{
+  border: 2px solid #FFCA08;
+  background-color: #FFCA08;
+}
+.word_list{
+  background-color: white;
+  text-align: left;
+  vertical-align: middle;
+  font-family: sans-serif;
+  flex: 1;
+}
+
+.table_header{
+  background-color: white;
+  text-align: center;
+  vertical-align: middle;
+  font-family: sans-serif;
+  flex: 1;
+}
+
+.total_row {
+  background-color: #ACCEEC;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: bold;
+  font-family: sans-serif;
+  flex: 1;
 }

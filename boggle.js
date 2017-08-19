@@ -1,18 +1,25 @@
+// array of played words
+var boggleWords = new Array();
+
 //current word
 var currentString = "";
 
 // game score
-var sum = 0;
+var sum_score = 0;
 
 // for knowing legal moves
 var prevcube;
 
-//Current boggle dice letter for the current game
+//Current boggle dice letters for the current game grid
 var boggle_curr = new Array();
 
-//Store the index of the current word
+//Store the indices of the current word being built
 var curr_word = new Array();
+
+//Store the index of the current letter
 var curr_index;
+
+//Store the index of the prev letter
 var prev_index;
 
 //boggle dice setup
@@ -42,6 +49,7 @@ var cube22 = new Array('I', 'P', 'R', 'R', 'R', 'Y');
 var cube23 = new Array('N', 'O', 'O', 'T', 'U', 'W');
 var cube24 = new Array('O', 'O', 'O', 'T', 'T', 'U');
 
+//the grid
 var grid = new Array(cube0, cube1, cube2, cube3, cube4, cube5, cube6, cube7, cube8, cube9, cube10, cube11, cube12, cube13, cube14, cube15, cube16, cube17, cube18, cube19, cube20, cube21, cube22, cube23, cube24);
 
 // returns a random letter from the cube
@@ -49,8 +57,7 @@ function chooseLetter(cube){
 	 return cube[Math.floor((Math.random()*6))];
 }
 
-// returns a random ordering of cubes in the grid, using the Knuth Shuffle from:
-// http://www.htmlblog.us/random-javascript-array
+// Randomize the cubes position on the grid and return new grid
 Array.prototype.randomize = function(){
 	var i = this.length;
 	var j;
@@ -65,7 +72,7 @@ Array.prototype.randomize = function(){
 }
 
 
-// randomizes board and resets
+// randomizes and initialize the board
 function shuffleBoggleGrid(){
   grid.randomize();
 	var stringOfI;
@@ -76,85 +83,122 @@ function shuffleBoggleGrid(){
     boggle_curr.push(letter);
 		document.getElementById(stringOfI).textContent = letter;
 	}
-  console.log(boggle_curr);
+  var data = "<tr class='table_header'><th>Word</th><th>Score</th></tr><tr class= 'total_row'><td>Total:</td><td>"+sum_score+"</td></tr>";
+  document.getElementById("word_list").innerHTML = data;
 }
 
-// build the word
+// build the word function
 function buildWord(event){
 	var cube = event.target;
   curr_index = Number(cube.id.slice(4));
   prev_index = curr_word[curr_word.length-1];
-  console.log("The current word array:", curr_word);
-  console.log("The current index is:",curr_index);
-  console.log("The prev index is:",prev_index);
 
+//If there are no letters chosen- brand new string
   if(curr_word.length == 0){
     cube.style.backgroundColor = "#ACCEEC";
     prev_index = Number(cube.id.slice(4));
     curr_word.push(prev_index);
     currentString = currentString.concat(cube.textContent);
-    console.log("I am in the first check");
-    console.log("The current word array:", curr_word);
-    console.log("The current string is:",currentString);
     document.getElementById("boggleword").textContent = currentString;
     return;
   }
+  //If the same letter is chosen
   else if(curr_index == prev_index){
     cube.style.backgroundColor = "white";
     if(curr_word.length>2){
-      console.log("I am in the second a check");
       prev_index = curr_word[curr_word.length-2];
     }
+    if(boggle_curr[curr_word[curr_word.length-1]] == "Qu" ){
+      currentString = currentString.slice(0,-2);
+    }
+    else{
+      currentString = currentString.slice(0,-1);
+    }
     curr_word.pop();
-    currentString = currentString.slice(0,-1);
-    console.log("I am in the second b check");
-    console.log("The current word array:", curr_word);
-    console.log("The current string is:",currentString);
     document.getElementById("boggleword").textContent = currentString;
     return;
   }
-
+//avoid selecting the same letter twice
   for (var x = 0; x<curr_word.length; x++){
     if(curr_word[x] == curr_index){
-      console.log("I am in the third check");
-      console.log("The current string is:",currentString);
       document.getElementById("boggleword").textContent = currentString;
       return;
     }
   }
 
-
+//Checking to see if the next letter selected is a valid selection based on relative index position
   if( curr_index == prev_index - 6 || curr_index == prev_index - 5 || curr_index == prev_index - 4 || curr_index == prev_index - 1 || curr_index == prev_index + 1 || curr_index == prev_index + 4 || curr_index == prev_index + 5 || curr_index == prev_index + 6){
     if (cube.style.backgroundColor != "#ACCEEC"){
   		cube.style.backgroundColor = "#ACCEEC";
       prev_index = Number(cube.id.slice(4));
       curr_word.push(prev_index);
   		currentString = currentString.concat(cube.textContent);
-      console.log("I am in the fourth check");
-      console.log("The current word array:", curr_word);
-      console.log("The current string is:",currentString);
       document.getElementById("boggleword").textContent = currentString;
       return;
   	}
   }
 }
 
-
-
-function submitWord(event){
-	if (mousedown == 1){
-		// if the word is long enough, add it to the word list
-		if (currentString.length >= 3){
-			boggleWords.push(currentString);
-			var wl = document.getElementById("wordList");
-			updateList(boggleWords, wl);
-		}
-		clearBoard();
-	}
+function checklist(boggleWords, currentString){
+  for (var i = 0; i<boggleWords.length; i++){
+    if (boggleWords[i][0] == currentString){
+      return true;
+    }
+  }
+  return false;
 }
 
+//Once the submit button is clicked
+//There are checks to see if the word is already picked, how big the word is, etc.
+function submitWord(event){
+    var curr_len= currentString.length;
+    if(curr_len == 0) {
+      return;
+    }
+    var score=0;
+    var check = checklist(boggleWords, currentString);
+    if(check == true){
+      return;
+    }
+    else if (check == false){
+      var curr_arr = [];
+      curr_arr.push(currentString);
+
+      if(curr_len <= 2){
+        score = 0;
+      }
+      else if(curr_len <= 4 ){
+        score = 1;
+      }
+      else if(curr_len == 5){
+        score = 2;
+      }
+      else if(curr_len == 6){
+        score = 3;
+      }
+      else if(curr_len == 7){
+        score = 5;
+      }
+      else if(curr_len >=8 ){
+        score = 11;
+      }
+      sum_score += score;
+      curr_arr.push(score);
+    }
+    boggleWords.push(curr_arr);
+    data = "<tr class='table_header'><th>Word</th><th>Score</th></tr>";
+    //creating the string to insert at the respective DOM element
+    for (var y = 0; y < boggleWords.length; y++){
+        data += "<tr class= 'word_list'><td>"+ boggleWords[y][0] +"</td><td>"+ boggleWords[y][1] +"</td></tr>";
+    }
+    data += "<tr class= 'total_row'><td>Total:</td><td>"+sum_score+"</td></tr>"
+    document.getElementById("word_list").innerHTML = data;
+    clearBoard();
+}
+
+//Clears the background color and resets the board
 function clearBoard(){
-	var grid = document.getElementById("boggleGrid");
+	var grid = document.getElementById("boggle_grid");
 	var cubes = grid.getElementsByTagName("div");
 	for (var i=0; i<cubes.length; i++)
 	{
@@ -163,17 +207,12 @@ function clearBoard(){
      	}
 	}
 	currentString = "";
-	mousedown = 0;
+  document.getElementById("boggleword").textContent = currentString;
+	curr_word =[];
+  prev_index = -1;
+  curr_index = -1;
 	return;
 }
 
-// reset array of played words and clear displayed table of words
-function clearlist(){
-	boggleWords.length = 0; //empty word list
-	var wl = document.getElementById("wordList");
-	while (document.getElementById("wordList").hasChildNodes()){
-		document.getElementById("wordList").removeChild(document.getElementById("wordList").firstChild);
-	}
-}
 
 shuffleBoggleGrid();
