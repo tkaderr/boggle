@@ -2,7 +2,7 @@
 
 .wrapper {
   height: auto;
-  width: 700px;
+  width: 500px;
   background-color: #F57921;
   margin: 0 auto;
 }
@@ -17,7 +17,7 @@
 
 .third_wrapper {
   height: 350px;
-  width: 419px;
+  width: 416px;
   background-color: #398BD4;
   padding: 10px;
   margin: 0 auto;
@@ -79,6 +79,7 @@
   display: inline-block;
   margin-left: 10px;
   position: absolute;
+  font-family: sans-serif;
 }
 
 

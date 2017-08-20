@@ -1,5 +1,7 @@
+//javascript file
+
 // array of played words
-var boggleWords = new Array();
+var boggle_words = new Array();
 
 //current word
 var currentString = "";
@@ -140,9 +142,9 @@ function buildWord(event){
 }
 
 //Checks to see if the word is already submitted
-function checklist(boggleWords, currentString){
-  for (var i = 0; i<boggleWords.length; i++){
-    if (boggleWords[i][0] == currentString){
+function checklist(boggle_words, currentString){
+  for (var i = 0; i<boggle_words.length; i++){
+    if (boggle_words[i][0] == currentString){
       return true;
     }
   }
@@ -158,7 +160,7 @@ function submitWord(event){
       return;
     }
     var score=0;
-    var check = checklist(boggleWords, currentString);
+    var check = checklist(boggle_words, currentString);
     if(check == true){
       return;
     }
@@ -187,11 +189,11 @@ function submitWord(event){
       sum_score += score;
       curr_arr.push(score);
     }
-    boggleWords.push(curr_arr);
+    boggle_words.push(curr_arr);
     data = "<tr class='table_header'><th>Word</th><th>Score</th></tr>";
     //creating the string to insert at the respective DOM element
-    for (var y = 0; y < boggleWords.length; y++){
-        data += "<tr class= 'word_list'><td>"+ boggleWords[y][0] +"</td><td>"+ boggleWords[y][1] +"</td></tr>";
+    for (var y = 0; y < boggle_words.length; y++){
+        data += "<tr class= 'word_list'><td>"+ boggle_words[y][0] +"</td><td>"+ boggle_words[y][1] +"</td></tr>";
     }
     data += "<tr class= 'total_row'><td>Total:</td><td>"+sum_score+"</td></tr>"
     document.getElementById("word_list").innerHTML = data;
